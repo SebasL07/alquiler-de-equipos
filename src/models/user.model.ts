@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 
 
-export interface UsuarioInput {
-    nombre: string;
-    tipo: string;
-    equipos: mongoose.Types.ObjectId[];
-    contrato: mongoose.Types.ObjectId;
-    contraseña: string;
+export interface UserInput {
+    name: string;
+    type: string;
+    devices: mongoose.Types.ObjectId[];
+    contract: mongoose.Types.ObjectId;
+    password: string;
 }
 
-export interface UsuarioDocument extends UsuarioInput, mongoose.Document {
+export interface UserDocument extends UserInput, mongoose.Document {
     createdAt: Date;
     updatedAt: Date;
     deletedAt?: Date;   
@@ -18,11 +18,12 @@ export interface UsuarioDocument extends UsuarioInput, mongoose.Document {
 }
 
 const UsuarioSchema = new mongoose.Schema({
-    nombre: { type: String, required: true },
-    tipo: { type: String, required: true },
-    equipos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Equipo" }],
-    contrato: { type: mongoose.Schema.Types.ObjectId, ref: "Contrato" },
-    contraseña: { type: String, required: true },
+    name: { type: String, required: true },
+    type: { type: String, required: true },
+    email: { type: String, required: true },
+    devices: [{ type: mongoose.Schema.Types.ObjectId, ref: "Equipo" }],
+    contract: { type: mongoose.Schema.Types.ObjectId, ref: "Contrato" },
+    password: { type: String, required: true },
 }, { timestamps: true, collection: 'usuarios' });
 
-export const UsuarioModel = mongoose.model<UsuarioDocument>("Usuario", UsuarioSchema);
+export const UserModel = mongoose.model<UserDocument>("Usuario", UsuarioSchema);
